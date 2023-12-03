@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress XmlUnusedNamespaceDeclaration -->
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+       http://www.liquibase.org/xml/ns/dbchangelog-ext
+       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--creation-->
+    <include file="2023-11-22-CRS-1_create_admin_table.sql"/>
+    <include file="2023-11-22-CRS-2_create_employee_table.sql"/>
+    <include file="2023-11-22-CRS-3_create_enterprise_equipment_table.sql"/>
+    <include file="2023-11-22-CRS-4_create_work_time_table.sql"/>
+    <include file="2023-11-22-CRS-5_create_food_compensation_table.sql"/>
+    <include file="2023-11-22-CRS-6_create_course_table.sql"/>
+    <include file="2023-11-22-CRS-7_create_dayoff_request_table.sql"/>
+    <include file="2023-11-22-CRS-8_create_productivity_statistics_table.sql"/>
+    <include file="2023-11-22-CRS-9_create_task_table.sql"/>
+    <include file="2023-11-22-CRS-10_create_equipment_possession_table.sql"/>
+    <include file="2023-11-22-CRS-11_create_course_enrollment_table.sql"/>
+
+    <!--functions-->
+    <include file="2023-11-27-CRS-12_create_get_compensation_sum_function.xml"/>
+    <include file="2023-11-27-CRS-13_create_give_equipment_to_team_function.xml"/>
+    <include file="2023-11-27-CRS-14_create_assign_course_to_team_function.xml"/>
+    <include file="2023-11-27-CRS-15_create_cancel_food_compensation_for_deadline_miss_function.xml"/>
+    <include file="2023-11-27-CRS-16_create_hire_employee_function.xml"/>
+    <include file="2023-11-27-CRS-17_create_fire_employee_function.xml"/>
+
+    <!--triggers-->
+    <include file="2023-11-29-CRS-18_create_triggers_01.xml"/>
+
+
+</databaseChangeLog>

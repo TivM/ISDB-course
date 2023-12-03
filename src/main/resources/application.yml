@@ -1,0 +1,30 @@
+app:
+  test: test
+
+
+management:
+  server:
+    port: 8080
+
+
+spring:
+  liquibase:
+    enabled: false
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/isdb
+    username: user
+    password: 123
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: false
+        generate_statistics: true
+        show_sql: true
+        jdbc:
+          batch_size: 50
+          fetch_size: 50
+          time_zone: UTC
+        order_inserts: true
+        order_updates: true

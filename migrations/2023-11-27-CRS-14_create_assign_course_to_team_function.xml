@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet author="v.trofimchenko" id="add-assign_course_to_team-function" dbms="postgresql">
+        <sqlFile encoding="utf8" path="functions/assign_course_to_team_function.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="false"
+                 endDelimiter="\n$$;" />
+    </changeSet>
+
+</databaseChangeLog>
