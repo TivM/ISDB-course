@@ -39,7 +39,7 @@ public class EnterpriseEquipmentServiceImpl implements EnterpriseEquipmentServic
     @Transactional
     public void giveEquipmentToTeam(String employeeDivision, int equipmentId, LocalDate possessionStart, LocalDate possessionEnd) {
         List<Employee> employees = employeeRepository.findByDivision(employeeDivision);
-        if (employees.size() == 0){
+        if (employees.isEmpty()){
             throw new RuntimeException("0 employees in division");
         }
 

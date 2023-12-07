@@ -3,6 +3,8 @@ package com.java.course.isdb.controller;
 import com.java.course.isdb.dto.request.FireEmployeeRequest;
 import com.java.course.isdb.dto.request.HireEmployeeRequest;
 
+import com.java.course.isdb.dto.response.EmployeeResponse;
+import com.java.course.isdb.dto.response.ListEmployeeResponse;
 import com.java.course.isdb.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,17 +21,26 @@ public class EmployeeController {
 
 
     @PostMapping("/hire")
-    public ResponseEntity<?> addEmployee(@RequestBody HireEmployeeRequest hireEmployeeRequest){
-        employeeService.hire(hireEmployeeRequest.name(), hireEmployeeRequest.division(),
-                hireEmployeeRequest.age(), hireEmployeeRequest.adminId());
-        return ResponseEntity.ok(hireEmployeeRequest.name());
+    public EmployeeResponse addEmployee(@RequestBody HireEmployeeRequest hireEmployeeRequest){
+        return EmployeeResponse.fromEntity(
+                employeeService.hire(hireEmployeeRequest.name(), hireEmployeeRequest.division(),
+                        hireEmployeeRequest.age(), hireEmployeeRequest.adminId())
+        );
     }
 
+    @GetMapping("/all")
+    public ListEmployeeResponse getAll(){
+        log.info("List all employees");
+        return ListEmployeeResponse.fromEntity(employeeService.getAll());
+    }
+
+    //need test
     @DeleteMapping("/fire")
-    public ResponseEntity<?> fireEmployee(@RequestBody FireEmployeeRequest fireEmployeeRequest){
+    public EmployeeResponse fireEmployee(@RequestBody FireEmployeeRequest fireEmployeeRequest){
         log.info("Removing employee with id {}", fireEmployeeRequest.employeeId());
-        employeeService.fire(fireEmployeeRequest.employeeId());
-        return ResponseEntity.ok(fireEmployeeRequest.employeeId());
+        return EmployeeResponse.fromEntity(
+                employeeService.fire(fireEmployeeRequest.employeeId())
+        );
     }
 
 

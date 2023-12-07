@@ -42,4 +42,9 @@ public class FoodCompensationServiceImpl implements FoodCompensationService {
     public int getCompensationSum(LocalDate compensationStartDate, LocalDate compensationEndDate, int employeeId) {
         return foodCompensationRepository.getCompensationSum(compensationStartDate, compensationEndDate, employeeId);
     }
+
+    @Override
+    public void cancelFoodCompensationForDeadlineMiss(int employeeId) {
+        foodCompensationRepository.cancelFoodCompensationForDeadlineMiss(employeeId);
+    }
 }

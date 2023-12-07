@@ -1,6 +1,7 @@
 package com.java.course.isdb.controller;
 
 import com.java.course.isdb.dto.request.AddAdminRequest;
+import com.java.course.isdb.dto.response.AdminResponse;
 import com.java.course.isdb.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,12 @@ public class AdminController {
 
     private final AdminService adminService;
 
+    //need test
     @PostMapping("/add")
-    public ResponseEntity<?> addAmin(@RequestBody AddAdminRequest addAdminRequest){
+    public AdminResponse addAmin(@RequestBody AddAdminRequest addAdminRequest){
         adminService.add(addAdminRequest.name(), addAdminRequest.age(), addAdminRequest.division());
-        return ResponseEntity.ok(addAdminRequest.name());
+        return AdminResponse.fromEntity(
+                adminService.add(addAdminRequest.name(), addAdminRequest.age(), addAdminRequest.division())
+        );
     }
 }

@@ -33,4 +33,12 @@ public class FoodCompensationController {
 
         return foodCompensationService.getCompensationSum(compensationStartDate, compensationEndDate, employeeId);
     }
+
+    @PutMapping("/cancel/{employeeId}")
+    int cancelFoodCompensationForDeadlineMiss(@PathVariable int employeeId){
+        foodCompensationService.cancelFoodCompensationForDeadlineMiss(employeeId);
+        return employeeId;
+    }
+
+
 }

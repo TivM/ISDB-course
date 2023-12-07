@@ -1,5 +1,6 @@
 package com.java.course.isdb.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -30,7 +31,7 @@ public class Employee {
     @Column(name = "division")
     private String division;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id")
     private Admin admin;
 
@@ -70,5 +71,10 @@ public class Employee {
     public void addDayoffRequest(DayoffRequest dayoffRequest){
         dayoffRequests.add(dayoffRequest);
         dayoffRequest.setEmployee(this);
+    }
+
+    public void addProductivityStatistics(ProductivityStatistics productivityStatistics) {
+        productivityStatisticsSet.add(productivityStatistics);
+        productivityStatistics.setEmployee(this);
     }
 }

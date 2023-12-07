@@ -1,11 +1,16 @@
 package com.java.course.isdb.service;
 
+import com.java.course.isdb.entity.Employee;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 public interface EmployeeService {
 
-    void hire(String employeeName, String employeeDivision, int employeeAge, int employeeAdminId);
+    Employee hire(String employeeName, String employeeDivision, int employeeAge, int employeeAdminId);
 
-    void fire(int employeeId);
+    Employee fire(int employeeId);
+
+    List<Employee> getAll();
 }

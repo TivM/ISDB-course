@@ -1,5 +1,7 @@
 package com.java.course.isdb.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.java.course.isdb.service.ProductivityStatisticsService;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,5 +40,10 @@ public class Admin {
     public void addEmployee(Employee employee) {
         employees.add(employee);
         employee.setAdmin(this);
+    }
+
+    public void addProductivityStatistics(ProductivityStatistics productivityStatistics) {
+        productivityStatisticsSet.add(productivityStatistics);
+        productivityStatistics.setAdmin(this);
     }
 }

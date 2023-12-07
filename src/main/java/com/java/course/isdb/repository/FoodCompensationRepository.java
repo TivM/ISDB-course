@@ -12,4 +12,7 @@ public interface FoodCompensationRepository extends JpaRepository<FoodCompensati
 
     @Procedure(procedureName = "get_compensation_sum")
     int getCompensationSum(LocalDate compensationStartDate, LocalDate compensationEndDate, int employeeId);
+
+    @Procedure(procedureName = "cancel_food_compensation_for_deadline_miss")
+    void cancelFoodCompensationForDeadlineMiss(int employeeId);
 }

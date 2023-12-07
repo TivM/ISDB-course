@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
@@ -19,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public void hire(String employeeName, String employeeDivision, int employeeAge, int employeeAdminId) {
+    public Employee hire(String employeeName, String employeeDivision, int employeeAge, int employeeAdminId) {
         Employee employee = new Employee()
                 .setName(employeeName)
                 .setDivision(employeeDivision)
@@ -30,15 +32,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         admin.addEmployee(employee);
         employeeRepository.hireEmployee(employeeName,
                 employeeDivision, employeeAge, employeeAdminId);
+
+        return employee;
     }
 
     @Override
     @Transactional
-    public void fire(int employeeId) {
+    public Employee fire(int employeeId) {
         Employee employee = employeeRepository.findById(employeeId).orElseThrow(
                 () -> new ResourceNotFoundException("employee doesn't exist")
         );
 
         employeeRepository.fireEmployee(employee.getId());
+
+        return employee;
+    }
+
+    @Override
+    public List<Employee> getAll() {
+        return employeeRepository.findAll();
     }
 }

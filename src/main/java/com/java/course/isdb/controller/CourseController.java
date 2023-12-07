@@ -3,6 +3,7 @@ package com.java.course.isdb.controller;
 import com.java.course.isdb.dto.request.AddCourseRequest;
 import com.java.course.isdb.dto.request.AddCourseToTeamRequest;
 import com.java.course.isdb.dto.request.HireEmployeeRequest;
+import com.java.course.isdb.dto.response.CourseResponse;
 import com.java.course.isdb.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,12 @@ public class CourseController {
 
     private final CourseService courseService;
 
+    //need test
     @PostMapping("/add")
-    public ResponseEntity<?> addCourse(@RequestBody AddCourseRequest addCourseRequest){
-        courseService.add(addCourseRequest.name(), addCourseRequest.description(), addCourseRequest.category());
-        return ResponseEntity.ok(addCourseRequest.name());
+    public CourseResponse addCourse(@RequestBody AddCourseRequest addCourseRequest){
+        return CourseResponse.fromEntity(
+                courseService.add(addCourseRequest.name(), addCourseRequest.description(), addCourseRequest.category())
+        );
     }
 
     @PostMapping("/toTeam")
