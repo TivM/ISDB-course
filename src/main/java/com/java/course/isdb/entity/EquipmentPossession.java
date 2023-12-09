@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @Table(name = "equipment_possession")
 @Accessors(chain = true)
 public class EquipmentPossession {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

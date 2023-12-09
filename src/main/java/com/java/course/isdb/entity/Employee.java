@@ -77,4 +77,9 @@ public class Employee {
         productivityStatisticsSet.add(productivityStatistics);
         productivityStatistics.setEmployee(this);
     }
+
+    public void addWorkTime(WorkTime workTime) {
+        workTimes.add(workTime);
+        workTime.setEmployee(this);
+    }
 }

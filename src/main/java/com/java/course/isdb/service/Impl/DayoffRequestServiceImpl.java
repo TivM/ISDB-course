@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -36,5 +37,10 @@ public class DayoffRequestServiceImpl implements DayoffRequestService {
         dayoffRequestRepository.save(dayoffRequest);
 
         return dayoffRequest;
+    }
+
+    @Override
+    public List<DayoffRequest> getAll() {
+        return dayoffRequestRepository.findAll();
     }
 }

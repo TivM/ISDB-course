@@ -38,4 +38,9 @@ public class ProductivityStatistics {
     @OneToMany(mappedBy = "productivityStatistics")
     private Set<Task> tasks = new HashSet<>();
 
+    public void addTask(Task task){
+        tasks.add(task);
+        task.setProductivityStatistics(this);
+    }
+
 }

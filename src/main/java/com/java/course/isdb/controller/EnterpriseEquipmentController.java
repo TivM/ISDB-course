@@ -2,13 +2,14 @@ package com.java.course.isdb.controller;
 
 import com.java.course.isdb.dto.request.AddEquipmentPossessionRequest;
 import com.java.course.isdb.dto.request.AddEquipmentRequest;
+import com.java.course.isdb.dto.response.EquipmentResponse;
+import com.java.course.isdb.dto.response.EquipmentToTeamResponse;
+import com.java.course.isdb.dto.response.ListEquipmentPossessionResponse;
+import com.java.course.isdb.dto.response.ListEquipmentResponse;
 import com.java.course.isdb.service.EnterpriseEquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,21 +19,32 @@ public class EnterpriseEquipmentController {
     private final EnterpriseEquipmentService enterpriseEquipmentService;
 
     @PostMapping("/add")
-    public ResponseEntity<?> addEquipment(@RequestBody AddEquipmentRequest addEquipmentRequest){
-       enterpriseEquipmentService.add(addEquipmentRequest.type(),
-               addEquipmentRequest.serialNumber(), addEquipmentRequest.description());
-        return ResponseEntity.ok(addEquipmentRequest.serialNumber());
+    public EquipmentResponse addEquipment(@RequestBody AddEquipmentRequest addEquipmentRequest){
+        return EquipmentResponse.fromEntity(
+                enterpriseEquipmentService.add(addEquipmentRequest.type(),
+                        addEquipmentRequest.serialNumber(), addEquipmentRequest.description())
+        );
     }
 
-    @PostMapping("/possession")
-    public ResponseEntity<?> addEquipmentPossession(@RequestBody AddEquipmentPossessionRequest addEquipmentPossessionRequest){
-        enterpriseEquipmentService.giveEquipmentToTeam(
-                addEquipmentPossessionRequest.employeeDivision(),
-                addEquipmentPossessionRequest.equipmentId(),
-                addEquipmentPossessionRequest.possessionStart(),
-                addEquipmentPossessionRequest.possessionEnd()
+    @PostMapping("/toTeam")
+    public EquipmentToTeamResponse addEquipmentToTeam(@RequestBody AddEquipmentPossessionRequest addEquipmentPossessionRequest){
+        return EquipmentToTeamResponse.fromEntity(
+                enterpriseEquipmentService.giveEquipmentToTeam(
+                        addEquipmentPossessionRequest.employeeDivision(),
+                        addEquipmentPossessionRequest.equipmentId(),
+                        addEquipmentPossessionRequest.possessionStart(),
+                        addEquipmentPossessionRequest.possessionEnd()
+                )
         );
+    }
 
-        return ResponseEntity.ok(addEquipmentPossessionRequest.equipmentId());
+    @GetMapping("/allEquipment")
+    public ListEquipmentResponse getAllEquipment(){
+        return ListEquipmentResponse.fromEntity(enterpriseEquipmentService.getAllEquipment());
+    }
+
+    @GetMapping("/allEquipmentPos")
+    public ListEquipmentPossessionResponse getAllEquipmentPossession(){
+        return ListEquipmentPossessionResponse.fromEntity(enterpriseEquipmentService.getAllEquipmentPossession());
     }
 }

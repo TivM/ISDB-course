@@ -39,9 +39,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     @Transactional
-    public void assignCourseToTeam(String employeeDivision, int courseId) {
+    public Course assignCourseToTeam(String employeeDivision, int courseId) {
         List<Employee> employees = employeeRepository.findByDivision(employeeDivision);
-        if (employees.size() == 0){
+        if (employees.isEmpty()){
             throw new RuntimeException("0 employees in division");
         }
 
@@ -62,5 +62,17 @@ public class CourseServiceImpl implements CourseService {
         }
 
         courseEnrollmentRepository.assignCourseToTeam(employeeDivision, courseId);
+
+        return course;
+    }
+
+    @Override
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
+    }
+
+    @Override
+    public List<CourseEnrollment> getAllCourseEnrollments() {
+        return courseEnrollmentRepository.findAll();
     }
 }

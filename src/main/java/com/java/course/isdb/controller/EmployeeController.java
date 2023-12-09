@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequestMapping("employee")
 public class EmployeeController {
-    private final EmployeeService employeeService;
 
+    private final EmployeeService employeeService;
 
     @PostMapping("/hire")
     public EmployeeResponse addEmployee(@RequestBody HireEmployeeRequest hireEmployeeRequest){

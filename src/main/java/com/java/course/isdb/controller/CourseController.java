@@ -2,15 +2,13 @@ package com.java.course.isdb.controller;
 
 import com.java.course.isdb.dto.request.AddCourseRequest;
 import com.java.course.isdb.dto.request.AddCourseToTeamRequest;
-import com.java.course.isdb.dto.request.HireEmployeeRequest;
+import com.java.course.isdb.dto.response.CourseToTeamResponse;
 import com.java.course.isdb.dto.response.CourseResponse;
+import com.java.course.isdb.dto.response.ListCourseEnrollmentResponse;
+import com.java.course.isdb.dto.response.ListCourseResponse;
 import com.java.course.isdb.service.CourseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +17,6 @@ public class CourseController {
 
     private final CourseService courseService;
 
-    //need test
     @PostMapping("/add")
     public CourseResponse addCourse(@RequestBody AddCourseRequest addCourseRequest){
         return CourseResponse.fromEntity(
@@ -28,8 +25,20 @@ public class CourseController {
     }
 
     @PostMapping("/toTeam")
-    public ResponseEntity<?> addToTeam(@RequestBody AddCourseToTeamRequest addCourseToTeamRequest){
-        courseService.assignCourseToTeam(addCourseToTeamRequest.employeeDivision(), addCourseToTeamRequest.courseId());
-        return ResponseEntity.ok(addCourseToTeamRequest.courseId());
+    public CourseToTeamResponse addToTeam(@RequestBody AddCourseToTeamRequest addCourseToTeamRequest){
+        return CourseToTeamResponse.fromEntity(
+                courseService.assignCourseToTeam(addCourseToTeamRequest.employeeDivision(), addCourseToTeamRequest.courseId())
+        );
     }
+
+    @GetMapping("/allCourses")
+    public ListCourseResponse getAllCourses(){
+        return ListCourseResponse.fromEntity(courseService.getAllCourses());
+    }
+
+    @GetMapping("/allCourseEnroll")
+    public ListCourseEnrollmentResponse getAllCourseEnrollments(){
+        return ListCourseEnrollmentResponse.fromEntity(courseService.getAllCourseEnrollments());
+    }
+
 }

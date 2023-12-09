@@ -37,7 +37,7 @@ public class EnterpriseEquipmentServiceImpl implements EnterpriseEquipmentServic
 
     @Override
     @Transactional
-    public void giveEquipmentToTeam(String employeeDivision, int equipmentId, LocalDate possessionStart, LocalDate possessionEnd) {
+    public EnterpriseEquipment giveEquipmentToTeam(String employeeDivision, int equipmentId, LocalDate possessionStart, LocalDate possessionEnd) {
         List<Employee> employees = employeeRepository.findByDivision(employeeDivision);
         if (employees.isEmpty()){
             throw new RuntimeException("0 employees in division");
@@ -57,7 +57,17 @@ public class EnterpriseEquipmentServiceImpl implements EnterpriseEquipmentServic
         }
 
         equipmentPossessionRepository.giveEquipmentToTeam(employeeDivision, equipmentId, possessionStart, possessionEnd);
+
+        return enterpriseEquipment;
     }
 
+    @Override
+    public List<EnterpriseEquipment> getAllEquipment() {
+        return enterpriseEquipmentRepository.findAll();
+    }
 
+    @Override
+    public List<EquipmentPossession> getAllEquipmentPossession() {
+        return equipmentPossessionRepository.findAll();
+    }
 }
