@@ -18,7 +18,6 @@ public class AdminController {
     //need test
     @PostMapping("/add")
     public AdminResponse addAmin(@RequestBody AddAdminRequest addAdminRequest){
-        adminService.add(addAdminRequest.name(), addAdminRequest.age(), addAdminRequest.division());
         return AdminResponse.fromEntity(
                 adminService.add(addAdminRequest.name(), addAdminRequest.age(), addAdminRequest.division())
         );

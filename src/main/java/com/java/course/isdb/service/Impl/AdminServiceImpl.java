@@ -15,7 +15,6 @@ public class AdminServiceImpl implements AdminService {
 
     private final AdminRepository adminRepository;
 
-
     @Override
     @Transactional
     public Admin add(String name, int age, String division) {
