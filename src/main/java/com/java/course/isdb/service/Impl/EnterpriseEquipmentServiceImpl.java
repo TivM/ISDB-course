@@ -40,7 +40,7 @@ public class EnterpriseEquipmentServiceImpl implements EnterpriseEquipmentServic
     public EnterpriseEquipment giveEquipmentToTeam(String employeeDivision, int equipmentId, LocalDate possessionStart, LocalDate possessionEnd) {
         List<Employee> employees = employeeRepository.findByDivision(employeeDivision);
         if (employees.isEmpty()){
-            throw new RuntimeException("0 employees in division");
+            throw new ResourceNotFoundException("0 employees in division");
         }
 
         EnterpriseEquipment enterpriseEquipment = enterpriseEquipmentRepository.findById(equipmentId).orElseThrow(

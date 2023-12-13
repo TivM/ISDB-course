@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 @RequestMapping("admin")
 public class AdminController {
 
     private final AdminService adminService;
 
-    //need test
     @PostMapping("/add")
     public AdminResponse addAmin(@RequestBody AddAdminRequest addAdminRequest){
         return AdminResponse.fromEntity(

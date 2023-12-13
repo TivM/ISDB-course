@@ -1,6 +1,7 @@
 package com.java.course.isdb.controller;
 
 import com.java.course.isdb.dto.request.AddFoodCompensationRequest;
+import com.java.course.isdb.dto.response.CompensationSumResponse;
 import com.java.course.isdb.dto.response.FoodCompensationResponse;
 import com.java.course.isdb.dto.response.ListFoodCompensationResponse;
 import com.java.course.isdb.service.FoodCompensationService;
@@ -15,6 +16,8 @@ import java.time.LocalDate;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
+@Slf4j
 @RequestMapping("food")
 public class FoodCompensationController {
 
@@ -32,16 +35,17 @@ public class FoodCompensationController {
     }
     //не работает
     @GetMapping("/compsum")
-    public Integer getCompensationSum(
-            @RequestParam("start")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate compensationStartDate,
-            @RequestParam("end")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate compensationEndDate,
+    public CompensationSumResponse getCompensationSum(
+            @RequestParam("start") LocalDate compensationStartDate,
+            @RequestParam("end") LocalDate compensationEndDate,
             @RequestParam("id") int employeeId){
-        return foodCompensationService.getCompensationSum(compensationStartDate, compensationEndDate, employeeId);
+        return CompensationSumResponse.fromEntity(
+                foodCompensationService.getCompensationSum(compensationStartDate, compensationEndDate, employeeId)
+        );
     }
 
     @PutMapping("/cancel/{employeeId}")
+    @CrossOrigin
     public int cancelFoodCompensationForDeadlineMiss(@PathVariable int employeeId){
         foodCompensationService.cancelFoodCompensationForDeadlineMiss(employeeId);
         return employeeId;

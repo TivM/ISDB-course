@@ -47,7 +47,10 @@ public class FoodCompensationServiceImpl implements FoodCompensationService {
 
     @Override
     public void cancelFoodCompensationForDeadlineMiss(int employeeId) {
-        foodCompensationRepository.cancelFoodCompensationForDeadlineMiss(employeeId);
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(
+                () -> new ResourceNotFoundException("employee doesn't exist")
+        );
+        foodCompensationRepository.cancelFoodCompensationForDeadlineMiss(employee.getId());
     }
 
     @Override

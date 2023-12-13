@@ -3,9 +3,10 @@ CREATE OR REPLACE PROCEDURE get_compensation_sum(IN comp_start_date date, IN com
 AS
 $$
 BEGIN
-    select into result sum(fc.payment_amount) from food_compensation fc
+    select sum(fc.payment_amount) into result from food_compensation fc
     where (select count(*) from dayoff_request df
-           where df.start_date <= fc.compensation_date and df.end_date >= fc.compensation_date and df.is_approved=true) = 0
+           where df.start_date <= fc.compensation_date and df.end_date >= fc.compensation_date and df.is_approved=true
+           and df.employee_id = emp_id) = 0
       and comp_start_date <= fc.compensation_date and comp_end_date >= fc.compensation_date and fc.employee_id=emp_id;
 END;
 $$;

@@ -42,7 +42,7 @@ public class CourseServiceImpl implements CourseService {
     public Course assignCourseToTeam(String employeeDivision, int courseId) {
         List<Employee> employees = employeeRepository.findByDivision(employeeDivision);
         if (employees.isEmpty()){
-            throw new RuntimeException("0 employees in division");
+            throw new ResourceNotFoundException("0 employees in division");
         }
 
         Course course = courseRepository.findById(courseId).orElseThrow(

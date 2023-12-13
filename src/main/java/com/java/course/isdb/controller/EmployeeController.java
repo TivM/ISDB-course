@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 @Slf4j
 @RequestMapping("employee")
 public class EmployeeController {
@@ -34,7 +35,6 @@ public class EmployeeController {
         return ListEmployeeResponse.fromEntity(employeeService.getAll());
     }
 
-    //need test
     @DeleteMapping("/fire")
     public EmployeeResponse fireEmployee(@RequestBody FireEmployeeRequest fireEmployeeRequest){
         log.info("Removing employee with id {}", fireEmployeeRequest.employeeId());

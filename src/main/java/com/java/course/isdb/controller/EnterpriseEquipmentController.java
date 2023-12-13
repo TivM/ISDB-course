@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 @RequestMapping("equipment")
 public class EnterpriseEquipmentController {
 
