@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("task")
+@RequestMapping("tasks")
 public class TaskController {
 
     private final TaskService taskService;
 
-    @PostMapping("/add")
+    @PostMapping()
     public TaskResponse add(@RequestBody AddTaskRequest addTaskRequest){
         return TaskResponse.fromEntity(
                 taskService.add(addTaskRequest.startDate(), addTaskRequest.endDate(),
@@ -23,7 +23,7 @@ public class TaskController {
         );
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public ListTaskResponse getAll(){
         return ListTaskResponse.fromEntity(taskService.getAll());
     }

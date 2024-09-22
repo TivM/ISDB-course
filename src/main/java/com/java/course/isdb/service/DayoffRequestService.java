@@ -10,4 +10,10 @@ public interface DayoffRequestService {
     DayoffRequest add(LocalDate startDate, LocalDate endDate, boolean isApproved, int employeeId);
 
     List<DayoffRequest> getAll();
+
+    DayoffRequest getById(int id);
+
+    void deleteById(int id);
+
+    DayoffRequest updateById(int id, LocalDate startDate, LocalDate endDate, boolean isApproved, int employeeId);
 }

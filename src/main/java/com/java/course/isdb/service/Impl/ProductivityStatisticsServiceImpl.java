@@ -50,4 +50,32 @@ public class ProductivityStatisticsServiceImpl implements ProductivityStatistics
     public List<ProductivityStatistics> getAll() {
         return productivityStatisticsRepository.findAll();
     }
+
+    @Override
+    public ProductivityStatistics getById(int id) {
+        var stats = productivityStatisticsRepository.findById(id);
+        return stats.orElse(null);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        productivityStatisticsRepository.deleteById(id);
+    }
+
+    @Override
+    public ProductivityStatistics updateById(int id, LocalDate date, String managerReview, int employeeId, int adminId) {
+        var statsOptional = productivityStatisticsRepository.findById(id);
+        ProductivityStatistics stats;
+        if (statsOptional.isPresent()) {
+            stats = statsOptional.get();
+        } else {
+            return null;
+        }
+
+        stats.setDate(date);
+        stats.setManagerReview(managerReview);
+
+        return productivityStatisticsRepository.save(stats);
+
+    }
 }

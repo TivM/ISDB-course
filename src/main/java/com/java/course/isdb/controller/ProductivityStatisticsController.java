@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("stat")
+@RequestMapping("stats")
 public class ProductivityStatisticsController {
 
     private final ProductivityStatisticsService productivityStatisticsService;
 
-    @PostMapping("/add")
+    @PostMapping()
     public ProductivityStatisticsResponse add(@RequestBody AddProductivityStatisticsRequest addProductivityStatisticsRequest){
         return ProductivityStatisticsResponse.fromEntity(
                 productivityStatisticsService.add(
@@ -26,10 +26,28 @@ public class ProductivityStatisticsController {
         );
     }
 
-    @GetMapping("/all")
+    @GetMapping("")
     public ListProductivityStatisticsResponse getAll(){
         return ListProductivityStatisticsResponse.fromEntity(productivityStatisticsService.getAll());
     }
 
+    @GetMapping("/{id}")
+    public ProductivityStatisticsResponse getById(@PathVariable int id){
+        return ProductivityStatisticsResponse.fromEntity(productivityStatisticsService.getById(id));
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable int id){
+        productivityStatisticsService.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ProductivityStatisticsResponse updateById(@PathVariable int id, @RequestBody AddProductivityStatisticsRequest addProductivityStatisticsRequest){
+        return ProductivityStatisticsResponse.fromEntity(productivityStatisticsService.updateById(id,
+                addProductivityStatisticsRequest.date(),
+                addProductivityStatisticsRequest.managerReview(),
+                addProductivityStatisticsRequest.employeeId(),
+                addProductivityStatisticsRequest.adminId()));
+    }
 
 }
