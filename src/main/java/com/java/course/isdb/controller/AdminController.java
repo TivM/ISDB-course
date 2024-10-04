@@ -5,6 +5,7 @@ import com.java.course.isdb.dto.response.AdminResponse;
 import com.java.course.isdb.dto.response.ListAdminResponse;
 import com.java.course.isdb.entity.Admin;
 import com.java.course.isdb.service.AdminService;
+import com.java.course.isdb.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     private final AdminService adminService;
-
-    @PostMapping()
-    public AdminResponse addAmin(@RequestBody AddAdminRequest addAdminRequest){
-        return AdminResponse.fromEntity(
-                adminService.add(addAdminRequest.name(), addAdminRequest.age(), addAdminRequest.division())
-        );
-    }
 
     @GetMapping()
     public ListAdminResponse getAll(){

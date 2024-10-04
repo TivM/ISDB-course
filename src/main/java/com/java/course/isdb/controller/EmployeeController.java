@@ -20,14 +20,6 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping()
-    public EmployeeResponse addEmployee(@RequestBody HireEmployeeRequest hireEmployeeRequest){
-        return EmployeeResponse.fromEntity(
-                employeeService.hire(hireEmployeeRequest.name(), hireEmployeeRequest.division(),
-                        hireEmployeeRequest.age(), hireEmployeeRequest.adminId())
-        );
-    }
-
     @GetMapping()
     public ListEmployeeResponse getAll(){
         log.info("List all employees");

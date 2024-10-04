@@ -1,12 +1,12 @@
 package com.java.course.isdb.repository;
 
-import com.java.course.isdb.entity.Admin;
+import com.java.course.isdb.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, Integer> {
-    Optional<Admin> findByEmail(String email);
+public interface UserRepository extends JpaRepository<User, Integer> {
+    Optional<User> findByEmail(String email);
 }
