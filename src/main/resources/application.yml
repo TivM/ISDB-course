@@ -13,8 +13,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5431/studs
-    username: s335040
-    password: test
+    username: ----
+    password: ----
 
   jpa:
     properties:
