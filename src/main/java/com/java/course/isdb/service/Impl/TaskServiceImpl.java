@@ -6,6 +6,7 @@ import com.java.course.isdb.exception.ResourceNotFoundException;
 import com.java.course.isdb.repository.ProductivityStatisticsRepository;
 import com.java.course.isdb.repository.TaskRepository;
 import com.java.course.isdb.service.TaskService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class TaskServiceImpl implements TaskService {
     private final ProductivityStatisticsRepository productivityStatisticsRepository;
 
     @Override
+    @Transactional
     public Task add(LocalDate startDate, LocalDate endDate, int complexity, String status, int productivityStatisticsId) {
         ProductivityStatistics productivityStatistics = productivityStatisticsRepository.findById(productivityStatisticsId).orElseThrow(
                 () -> new ResourceNotFoundException("productivity statistics not found")

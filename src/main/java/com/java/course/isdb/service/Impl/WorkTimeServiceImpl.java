@@ -6,6 +6,7 @@ import com.java.course.isdb.exception.ResourceNotFoundException;
 import com.java.course.isdb.repository.EmployeeRepository;
 import com.java.course.isdb.repository.WorkTimeRepository;
 import com.java.course.isdb.service.WorkTimeService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class WorkTimeServiceImpl implements WorkTimeService {
     private final EmployeeRepository employeeRepository;
 
     @Override
+    @Transactional
     public WorkTime add(LocalDateTime startTimestamp, LocalDateTime endTimestamp, int employeeId) {
         Employee employee = employeeRepository.findById(employeeId).orElseThrow(
                 () -> new ResourceNotFoundException("employee doesn't exist")

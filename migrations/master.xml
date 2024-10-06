@@ -21,6 +21,7 @@
     <include file="2023-11-22-CRS-9_create_task_table.sql"/>
     <include file="2023-11-22-CRS-10_create_equipment_possession_table.sql"/>
     <include file="2023-11-22-CRS-11_create_course_enrollment_table.sql"/>
+    <include file="2024-09-06-CRS-12_create_user_table.sql"/>
 
     <!--functions-->
     <include file="2023-11-27-CRS-12_create_get_compensation_sum_function.xml"/>
@@ -33,5 +34,7 @@
     <!--triggers-->
     <include file="2023-11-29-CRS-18_create_triggers_01.xml"/>
 
+    <!--changes-->
+    <include file="2024-09-06-CRS-13_add_email_column_in_admin_table.sql"/>
 
 </databaseChangeLog>

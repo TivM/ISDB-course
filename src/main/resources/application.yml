@@ -1,10 +1,35 @@
 app:
   test: test
 
-
 management:
   server:
-    port: 8080
+    port: 8180
+
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: [ "info", "health", "prometheus" ]
+      base-path: /
+      path-mapping:
+        prometheus: metrics
+
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+    prometheus:
+      enabled: true
+
+  metrics:
+    tags:
+      application: IsbdApplication
+
+  prometheus:
+    metrics:
+      export:
+        enabled: true
 
 
 spring:
@@ -12,9 +37,9 @@ spring:
     enabled: false
 
   datasource:
-    url: jdbc:postgresql://localhost:5431/studs
-    username: ----
-    password: ----
+    url: jdbc:postgresql://localhost:5432/isdb
+    username: user
+    password: 123
 
   jpa:
     properties:
