@@ -3,7 +3,7 @@ app:
 
 management:
   server:
-    port: 8180
+    port: 8080
 
   endpoints:
     enabled-by-default: false
@@ -34,16 +34,20 @@ management:
 
 spring:
   liquibase:
-    enabled: false
+    change-log: classpath:/migrations/master.xml
+    enabled: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/isdb
-    username: user
-    password: 123
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: postgres
+    password: test
 
   jpa:
+    hibernate:
+      ddl-auto: create-only
     properties:
       hibernate:
+        ddl-auto: create-drop
         format_sql: false
         generate_statistics: true
         show_sql: true

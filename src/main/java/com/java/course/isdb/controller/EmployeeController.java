@@ -26,11 +26,11 @@ public class EmployeeController {
         return ListEmployeeResponse.fromEntity(employeeService.getAll());
     }
 
-    @DeleteMapping()
-    public EmployeeResponse fireEmployee(@RequestBody FireEmployeeRequest fireEmployeeRequest){
-        log.info("Removing employee with id {}", fireEmployeeRequest.employeeId());
+    @DeleteMapping("/{id}")
+    public EmployeeResponse fireEmployee(@PathVariable int id){
+        log.info("Removing employee with id {}", id);
         return EmployeeResponse.fromEntity(
-                employeeService.fire(fireEmployeeRequest.employeeId())
+                employeeService.fire(id)
         );
     }
 }

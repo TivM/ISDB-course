@@ -31,7 +31,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req ->
                         req.requestMatchers("/auth/**")
                                 .permitAll()
-                                .requestMatchers(checkPort(8180)).permitAll()
                                 .requestMatchers("/swagger-ui/**")
                                 .permitAll()
                                 .requestMatchers("/v3/api-docs/**")
