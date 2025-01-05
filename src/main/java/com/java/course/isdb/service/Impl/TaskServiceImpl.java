@@ -44,4 +44,20 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> getAll() {
         return taskRepository.findAll();
     }
+
+    @Override
+    public Task updateById(Integer id, String status) {
+        var taskOptional = taskRepository.findById(id);
+        Task task;
+        if (taskOptional.isPresent()) {
+            task = taskOptional.get();
+        } else {
+            return null;
+        }
+
+        task.setStatus(status);
+
+        return taskRepository.save(task);
+
+    }
 }

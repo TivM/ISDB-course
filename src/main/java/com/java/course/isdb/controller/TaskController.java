@@ -1,6 +1,8 @@
 package com.java.course.isdb.controller;
 
+import com.java.course.isdb.dto.request.AddAdminRequest;
 import com.java.course.isdb.dto.request.AddTaskRequest;
+import com.java.course.isdb.dto.response.AdminResponse;
 import com.java.course.isdb.dto.response.ListTaskResponse;
 import com.java.course.isdb.dto.response.TaskResponse;
 import com.java.course.isdb.service.TaskService;
@@ -26,5 +28,11 @@ public class TaskController {
     @GetMapping()
     public ListTaskResponse getAll(){
         return ListTaskResponse.fromEntity(taskService.getAll());
+    }
+
+    @PutMapping("/{id}/{status}")
+    public TaskResponse updateById(@PathVariable int id, @PathVariable String status){
+        return TaskResponse.fromEntity(
+                taskService.updateById(id, status));
     }
 }

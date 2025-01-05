@@ -10,4 +10,7 @@ public interface TaskService {
     Task add(LocalDate startDate, LocalDate endDate, int complexity, String status, int productivityStatisticsId);
 
     List<Task> getAll();
+
+
+    Task updateById(Integer id, String status);
 }
