@@ -1,24 +1,53 @@
 app:
   test: test
 
-
 management:
   server:
     port: 8080
 
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: [ "info", "health", "prometheus" ]
+      base-path: /
+      path-mapping:
+        prometheus: metrics
+
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+    prometheus:
+      enabled: true
+
+  metrics:
+    tags:
+      application: IsbdApplication
+
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
 
 spring:
   liquibase:
-    enabled: false
+    change-log: classpath:/migrations/master.xml
+    enabled: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/isdb
-    username: user
-    password: 123
+    url: jdbc:postgresql://localhost:5433/postgres
+    username: postgres
+    password: test
 
   jpa:
+    hibernate:
+      ddl-auto: create-only
     properties:
       hibernate:
+        ddl-auto: create-drop
         format_sql: false
         generate_statistics: true
         show_sql: true
@@ -28,3 +57,9 @@ spring:
           time_zone: UTC
         order_inserts: true
         order_updates: true
+
+application:
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000

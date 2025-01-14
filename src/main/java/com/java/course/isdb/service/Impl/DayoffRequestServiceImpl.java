@@ -1,5 +1,6 @@
 package com.java.course.isdb.service.Impl;
 
+import com.java.course.isdb.entity.Admin;
 import com.java.course.isdb.entity.DayoffRequest;
 import com.java.course.isdb.entity.Employee;
 import com.java.course.isdb.exception.ResourceNotFoundException;
@@ -42,5 +43,33 @@ public class DayoffRequestServiceImpl implements DayoffRequestService {
     @Override
     public List<DayoffRequest> getAll() {
         return dayoffRequestRepository.findAll();
+    }
+
+    @Override
+    public DayoffRequest getById(int id) {
+        var request = dayoffRequestRepository.findById(id);
+        return request.orElse(null);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        dayoffRequestRepository.deleteById(id);
+    }
+
+    @Override
+    public DayoffRequest updateById(int id, LocalDate startDate, LocalDate endDate, boolean isApproved, int employeeId) {
+        var dayOffOptional = dayoffRequestRepository.findById(id);
+        DayoffRequest dayOff;
+        if (dayOffOptional.isPresent()) {
+            dayOff = dayOffOptional.get();
+        } else {
+            return null;
+        }
+
+        dayOff.setStartDate(startDate);
+        dayOff.setEndDate(endDate);
+        dayOff.setIsApproved(isApproved);
+
+        return dayoffRequestRepository.save(dayOff);
     }
 }

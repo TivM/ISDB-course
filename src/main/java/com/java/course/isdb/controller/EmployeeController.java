@@ -8,7 +8,6 @@ import com.java.course.isdb.dto.response.ListEmployeeResponse;
 import com.java.course.isdb.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,32 +15,22 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @CrossOrigin
 @Slf4j
-@RequestMapping("employee")
+@RequestMapping("employees")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @PostMapping("/hire")
-    public EmployeeResponse addEmployee(@RequestBody HireEmployeeRequest hireEmployeeRequest){
-        return EmployeeResponse.fromEntity(
-                employeeService.hire(hireEmployeeRequest.name(), hireEmployeeRequest.division(),
-                        hireEmployeeRequest.age(), hireEmployeeRequest.adminId())
-        );
-    }
-
-    @GetMapping("/all")
+    @GetMapping()
     public ListEmployeeResponse getAll(){
         log.info("List all employees");
         return ListEmployeeResponse.fromEntity(employeeService.getAll());
     }
 
-    @DeleteMapping("/fire")
-    public EmployeeResponse fireEmployee(@RequestBody FireEmployeeRequest fireEmployeeRequest){
-        log.info("Removing employee with id {}", fireEmployeeRequest.employeeId());
+    @DeleteMapping("/{id}")
+    public EmployeeResponse fireEmployee(@PathVariable int id){
+        log.info("Removing employee with id {}", id);
         return EmployeeResponse.fromEntity(
-                employeeService.fire(fireEmployeeRequest.employeeId())
+                employeeService.fire(id)
         );
     }
-
-
 }

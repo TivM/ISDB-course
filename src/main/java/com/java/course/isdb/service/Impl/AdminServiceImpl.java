@@ -32,4 +32,32 @@ public class AdminServiceImpl implements AdminService {
     public List<Admin> getAll() {
         return adminRepository.findAll();
     }
+
+    @Override
+    public Admin getById(int id) {
+        var admin = adminRepository.findById(id);
+        return admin.orElse(null);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        adminRepository.deleteById(id);
+    }
+
+    @Override
+    public Admin updateById(int id, String name, int age, String division) {
+        var adminOptional = adminRepository.findById(id);
+        Admin admin;
+        if (adminOptional.isPresent()) {
+            admin = adminOptional.get();
+        } else {
+            return null;
+        }
+
+        admin.setAge(age);
+        admin.setName(name);
+        admin.setDivision(division);
+
+        return adminRepository.save(admin);
+    }
 }

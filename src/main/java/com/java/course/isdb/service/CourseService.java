@@ -14,4 +14,8 @@ public interface CourseService {
     List<Course> getAllCourses();
 
     List<CourseEnrollment> getAllCourseEnrollments();
+
+    void deleteById(int id);
+
+    void deleteEnrollment(int courseId, int employeeId);
 }

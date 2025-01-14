@@ -5,11 +5,8 @@ import com.java.course.isdb.dto.response.CompensationSumResponse;
 import com.java.course.isdb.dto.response.FoodCompensationResponse;
 import com.java.course.isdb.dto.response.ListFoodCompensationResponse;
 import com.java.course.isdb.service.FoodCompensationService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -18,12 +15,12 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @CrossOrigin
 @Slf4j
-@RequestMapping("food")
+@RequestMapping("food-compensation")
 public class FoodCompensationController {
 
     private final FoodCompensationService foodCompensationService;
 
-    @PostMapping("/add")
+    @PostMapping()
     public FoodCompensationResponse add(@RequestBody AddFoodCompensationRequest addFoodCompensationRequest){
         return FoodCompensationResponse.fromEntity(
                 foodCompensationService.add(
@@ -33,8 +30,8 @@ public class FoodCompensationController {
                         addFoodCompensationRequest.employeeId())
         );
     }
-    //не работает
-    @GetMapping("/compsum")
+
+    @GetMapping("/count-sum")
     public CompensationSumResponse getCompensationSum(
             @RequestParam("start") LocalDate compensationStartDate,
             @RequestParam("end") LocalDate compensationEndDate,
@@ -44,14 +41,13 @@ public class FoodCompensationController {
         );
     }
 
-    @PutMapping("/cancel/{employeeId}")
-    @CrossOrigin
-    public int cancelFoodCompensationForDeadlineMiss(@PathVariable int employeeId){
+    @PostMapping("/{employee-id}/cancellation")
+    public int cancelFoodCompensationForDeadlineMiss(@PathVariable("employee-id") int employeeId){
         foodCompensationService.cancelFoodCompensationForDeadlineMiss(employeeId);
         return employeeId;
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public ListFoodCompensationResponse getAll(){
         return ListFoodCompensationResponse.fromEntity(foodCompensationService.getAll());
     }

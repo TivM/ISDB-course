@@ -75,4 +75,17 @@ public class CourseServiceImpl implements CourseService {
     public List<CourseEnrollment> getAllCourseEnrollments() {
         return courseEnrollmentRepository.findAll();
     }
+
+    @Override
+    public void deleteById(int id) {
+        courseRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteEnrollment(int courseId, int employeeId) {
+        var key = new CourseEnrollmentId();
+        key.setCourseId(courseId);
+        key.setEmployeeId(employeeId);
+        courseEnrollmentRepository.deleteById(key);
+    }
 }

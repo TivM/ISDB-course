@@ -18,8 +18,8 @@ public class RestResponseEntityExceptionHandler extends
     public ResponseEntity<ApiErrorResponse> handleResourceNotFoundException(ResourceNotFoundException ex) {
         return new ResponseEntity<>(
                 new ApiErrorResponse(
-                        "Something not found or doesn't exist",
-                        "0",
+                        "Resource not found or doesn't exist",
+                        String.valueOf(HttpStatus.NOT_FOUND.value()),
                         "Resource not found",
                         ex.getMessage(),
                         Arrays.stream(ex.getStackTrace())
@@ -35,7 +35,7 @@ public class RestResponseEntityExceptionHandler extends
         return new ResponseEntity<>(
                 new ApiErrorResponse(
                         "PSQL Exception",
-                        "0",
+                        String.valueOf(HttpStatus.NOT_FOUND.value()),
                         "Wrong sql procedure",
                         ex.getMessage(),
                         Arrays.stream(ex.getStackTrace())

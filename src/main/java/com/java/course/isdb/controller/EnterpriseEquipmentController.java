@@ -19,7 +19,7 @@ public class EnterpriseEquipmentController {
 
     private final EnterpriseEquipmentService enterpriseEquipmentService;
 
-    @PostMapping("/add")
+    @PostMapping()
     public EquipmentResponse addEquipment(@RequestBody AddEquipmentRequest addEquipmentRequest){
         return EquipmentResponse.fromEntity(
                 enterpriseEquipmentService.add(addEquipmentRequest.type(),
@@ -27,7 +27,7 @@ public class EnterpriseEquipmentController {
         );
     }
 
-    @PostMapping("/toTeam")
+    @PostMapping("/division")
     public EquipmentToTeamResponse addEquipmentToTeam(@RequestBody AddEquipmentPossessionRequest addEquipmentPossessionRequest){
         return EquipmentToTeamResponse.fromEntity(
                 enterpriseEquipmentService.giveEquipmentToTeam(
@@ -39,12 +39,12 @@ public class EnterpriseEquipmentController {
         );
     }
 
-    @GetMapping("/allEquipment")
+    @GetMapping()
     public ListEquipmentResponse getAllEquipment(){
         return ListEquipmentResponse.fromEntity(enterpriseEquipmentService.getAllEquipment());
     }
 
-    @GetMapping("/allEquipmentPos")
+    @GetMapping("/division")
     public ListEquipmentPossessionResponse getAllEquipmentPossession(){
         return ListEquipmentPossessionResponse.fromEntity(enterpriseEquipmentService.getAllEquipmentPossession());
     }

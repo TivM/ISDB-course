@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("work")
+@RequestMapping("work-time")
 public class WorkTimeController {
 
     private final WorkTimeService workTimeService;
 
-    @PostMapping("/add")
+    @PostMapping()
     public WorkTimeResponse add(@RequestBody AddWorkTimeRequest addWorkTimeRequest){
         return WorkTimeResponse.fromEntity(
                 workTimeService.add(
@@ -26,7 +26,7 @@ public class WorkTimeController {
         );
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public ListWorkTimeResponse getAll(){
         return ListWorkTimeResponse.fromEntity(workTimeService.getAll());
     }
